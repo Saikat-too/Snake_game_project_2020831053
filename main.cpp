@@ -20,7 +20,7 @@ int main(){
     int dir=1;
     detectgraph(&gd,&gm);
     initgraph(&gd,&gm,"");
-    setfillstyle(1,1);//(style,color)
+    setfillstyle(1,3);//(style,color)
     x[0]=200,y[0]=200;
     d=1;
     int length = 1;
@@ -28,13 +28,17 @@ int main(){
 for(;;){
     setfillstyle(1,0);
     bar(0,0,640,480);
-    setfillstyle(1,2);
+    setfillstyle(1,1);
     bar(0,0,640,10);
     bar(0,0,10,480);
     bar(0,480,640,470);
     bar(630,10,640,480);
+    setfillstyle(1,4);
+    bar(310,240,350,280);
+    bar(100,120,150,170);
+    bar(460,300,500,340);
        // food taken?
-   if(x[0]==rx && y[0]==ry ){
+   if(abs(x[0]-rx)<=10 && abs(y[0]-ry)<=10 ){
     length += 1;
     f=f+1;
     setfillstyle(1,0);
@@ -50,9 +54,13 @@ for(;;){
     rx=rx*10;
     ry=ry/10;
     ry=ry*10;
-    setfillstyle(1,2);
+
      }
-    bar(rx,ry,rx+10,ry+10);
+     setcolor(RED);
+     setfillstyle(SOLID_FILL,RED);
+    circle(rx,ry,10);
+    floodfill(rx,ry,RED);
+
     if(GetAsyncKeyState(VK_RIGHT)){d=1;}
     else if(GetAsyncKeyState(VK_LEFT)){ d=2;}
     else if(GetAsyncKeyState(VK_UP)){ d=3;}
@@ -84,6 +92,7 @@ for(;;){
         break;
     }
     for(int i = 0; i < length;i++){
+        setfillstyle(1,5);
         bar(x[i],y[i],x[i]+10,y[i]+10);
     }
     for(int i= 199; i >0;i--){
@@ -102,6 +111,20 @@ for(;;){
             break;
             }
     }
+   if(x[0]>=310&&x[0]<=350&&y[0]>=240&&y[0]<=280){
+    endfunc(f,3);
+    break;
+   }
+    if(x[0]>=100&&x[0]<=150&&y[0]>=120&&y[0]<=170){
+    endfunc(f,3);
+    break;
+   }
+if(x[0]>=460&&x[0]<=500&&y[0]>=300&&y[0]<=340){
+    endfunc(f,3);
+    break;
+   }
+
+
     if(x[0] == x[chk] && y[0] == y[chk]){
     endfunc(f,1);
     break;
@@ -115,12 +138,15 @@ int endfunc(int e,int a){
     bar(0,0,640,470);
     system("cls");
     if(a == 0){
-        printf("You died outside the boundary!!!\n");
+        printf("You died outside the boundary!!!\n I know you want to be free but your mind can't let you do so\n");
     }
     else if(a== 1){
-        printf("You died into yourself!!!\n");
+        printf("You died into yourself!!!\n How can you be so self destructed\n");
     }
-    printf("Your score is : %d\n", e);
+    else if(a==3){
+        printf("You died into obstacle\n Watch out do some meditation keep calm\n");
+    }
+    printf("Your credit getting another life is : %d\n", e);
     getch();
     return 0;
 }
