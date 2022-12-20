@@ -38,7 +38,7 @@ for(;;){
     bar(100,120,150,170);
     bar(460,300,500,340);
        // food taken?
-   if(abs(x[0]-rx)<=5 && abs(y[0]-ry)<=5 ){
+   if(abs(x[0]-rx)<=10 && abs(y[0]-ry)<=10 ){
     length += 1;
     f=f+1;
     setfillstyle(1,0);
@@ -58,7 +58,7 @@ for(;;){
      }
      setcolor(RED);
      setfillstyle(SOLID_FILL,RED);
-    circle(rx,ry,5);
+    circle(rx,ry,10);
     floodfill(rx,ry,RED);
 
     if(GetAsyncKeyState(VK_RIGHT)){d=1;}
